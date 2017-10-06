@@ -1,4 +1,4 @@
-package controller;
+package auth;
 
 import data.User;
 import repo.UserRepository;

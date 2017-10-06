@@ -1,21 +1,27 @@
 package config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @EnableWebMvc   //Enable Spring MVC
-@ComponentScan ("controller")
+@ComponentScan ("controller,auth")
+@PropertySource (value = {"classpath:application.properties" })
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private Environment env;
 
     private static final String VIEWS              = "/WEB-INF/views/";
     private static final String RESOURCES_HANDLER  = "/resources/";
@@ -28,13 +34,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/login", "/home", "/").addResourceLocations("/resources/css/**");
-        registry.addResourceHandler("/login", "/home", "/").addResourceLocations("/resources/js/**");
+        registry.addResourceHandler( "/login", "/").addResourceLocations("/resources/css/**");
+        registry.addResourceHandler( "/login", "/").addResourceLocations("/resources/js/**");
     }
 
     @Bean
-    public TemplateResolver templateResolver() {
-        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+    public ITemplateResolver templateResolver() {
+        //ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+        SpringResourceTemplateResolver templateResolver         = new SpringResourceTemplateResolver();
         templateResolver.setPrefix(VIEWS);
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");

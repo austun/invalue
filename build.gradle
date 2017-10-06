@@ -3,7 +3,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE")
+    }
+    properties{
+
     }
 }
 
@@ -14,8 +17,9 @@ configurations {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
-jar {
+war {
     baseName = 'invalue'
     version =  '1.0.0'
 }
@@ -42,7 +46,12 @@ dependencies {
             "org.webjars:jquery:2.1.4",
             "joda-time:joda-time:2.2"
     )
+    compile "org.thymeleaf:thymeleaf:3.0.1.RELEASE"
+    compile "org.thymeleaf:thymeleaf-spring4:3.0.1.RELEASE"
+    compile "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.0.3"
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
+    //This should be commented out to run application on local instead of server
+    //providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }

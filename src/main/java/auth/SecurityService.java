@@ -1,4 +1,4 @@
-package controller;
+package auth;
 
 /**
  * Created by eustali on 03.03.2017.

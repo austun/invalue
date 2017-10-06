@@ -1,5 +1,6 @@
-package controller;
+package auth;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +20,11 @@ public class LoginSecurityService implements SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    Logger log = Logger.getRootLogger();
+
     @Override
     public void autologin(String username, String password) {
+        log.info("Checking credentials!");
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
@@ -29,7 +33,7 @@ public class LoginSecurityService implements SecurityService {
 
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            //logger.debug(String.format("Auto login %s successfully!", username));
+            log.info(String.format("Auto login %s successfully!", username));
         }
     }
 }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
     @RequestMapping (value = "/", method = RequestMethod.GET)
     public String homePage() {
-        return "standart";
+        return "home";
     }
 
     @RequestMapping (value = "/logout", method = RequestMethod.GET)

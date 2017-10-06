@@ -19,12 +19,12 @@ public class LoggerController {
 
     public LoggerController () {}
 
-/*    @AfterReturning ("execution(* controller.*..*(..))")
+    /**    @AfterReturning ("execution(* controller.*..*(..))")
     public void logMethodAccessAfter(JoinPoint joinPoint) {
         log.info("***** Completed: " + joinPoint.getSignature().getName() + " *****");
-    }*/
+    }**/
 
-    @Before ("execution(* controller.*..*(..))")
+    @Before ("execution(* controller.*..*(..)) || execution(* repo.*..*(..)) || execution(* config.*..*(..)) || execution(* auth.*..*(..))")
     public void logMethodAccessBefore(JoinPoint joinPoint) {
         log.info("[" + joinPoint.getTarget().getClass() + "." +
                  joinPoint.getSignature().getName() + "(" + Arrays.toString(joinPoint.getArgs()) + ")]");
