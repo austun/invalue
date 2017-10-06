@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="../../resources/css/bootstrap.min.css" media="screen"
           th:href="@{/resources/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="/webapp/resources/css/style.css" media="screen" th:href="@{/resources/css/style.css}"/>
     <link rel="stylesheet" href="/webapp/resources/css/jquery-ui.css" type="text/css"/>
-    <!--link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"-->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <!--script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script-->
     <script src="../../resources/js/jquery-ui.js"></script>
     <script src="../../resources/js/jquery-ui.min.js"></script>
     <script src="../../resources/js/bootstrap.min.js"></script>
@@ -29,110 +26,79 @@
 <body>
 <div th:replace="fragments/header :: header">
 </div>
-
-<!--div class="container">
-    <div class="hero-unit">
-        <input type="text" placeholder="start date" id="startdate">
-        <input type="text" placeholder="end date" id="enddate">
-    </div>
-</div-->
-
 <div class="container">
-    <!--th:form action="form/form1"
-               modelAttribute="form1">
-        <label class="control_label_c">From : </label>
-        <div class="controls_c">
-            <input type="text" path="fromDate" class="date-picker" />
-        </div>
-    </th:form-->
-
+    <h1>Filter By</h1>
     <div align="left" class="hero-unit">
+        <form th:action="@{/data}" method="post">
+            <table>
+                <tr>
+                    <td>Start Date:</td>
+                    <td><input class = "form-control" lang="en" type="date" name="startdate"/></td>
+                </tr>
+                <tr>
+                    <td>End Date:</td>
+                    <td><input class = "form-control" lang="en" type="date" name="enddate"/></td>
+                </tr>
+                <tr>
+                    <td>Data Type:</td>
+                    <td>
+                        <select class="form-control" lang="en" type="text" name="datatype">
+                            <option th:selected="All">All</option>
+                            <option th:each="datatype : ${datatypes}"
+                                    th:value="${datatype}"
+                                    th:text="${datatype}">
+                            </option>
+                        </select>
 
-        <th:form href="#" th:href="@{/data}" th:object="${timerange}" method="post">
-            <p>Start date: <input type="text" th:field="*{startdate}"/></p>
-            <p>End date: <input type="text" th:field="*{enddate}"/></p>
-            <p><input type="submit" class="btn btn-large btn-success" value="Submit"/></p>
-        </th:form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-large btn-success">Submit</button>
+                    </td>
+                </tr>
+            </table>
+            <div align="left" class="hero-unit">
+                <h1>
+                    Manufactural Reports
+                </h1>
 
-        <!--th:form action="#" th:action="@{/data/datefilter}" th:object="${datefilter}" method="post">
-            <th><b>Please select dates</b></th>
-            <br/>
-            <th>Start date:</th>
-            <input class="form-control-static" type="text" placeholder="choose date" id="startdate" name="startdate"/>
-            <th>End date:</th>
-            <input class="form-control-static" type="text" placeholder="choose date" id="enddate" name="enddate"/>
-            <button type="submit" class="btn btn-large btn-success">Submit</button>
-        </th:form-->
-
-        <!--th:form>
-            <th><b>Please select dates</b></th>
-            <br/>
-            <th>Start date:</th>
-            <input class="form-control-static" type="text" placeholder="choose date" id="startdate" name="startdate"/>
-            <th>End date:</th>
-            <input class="form-control-static" type="text" placeholder="choose date" id="enddate" name="enddate"/>
-            <a href="#" th:href="@{/data/datefilter}" class="btn btn-large btn-success">Submit</a>
-        </th:form-->
+                <table class="table table-condensed thead">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Company ID</th>
+                        <th>Data Type</th>
+                        <th>Device ID</th>
+                        <th>Machine ID</th>
+                        <th>Name</th>
+                        <th>Sensor ID</th>
+                        <th>Site ID</th>
+                        <th>Value</th>
+                        <th>Wo ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="data : ${datalist}">
+                        <td th:text="${data.time}"></td>
+                        <td th:text="${data.companyID}"></td>
+                        <td th:text="${data.datatype}"></td>
+                        <td th:text="${data.deviceID}"></td>
+                        <td th:text="${data.machineID}"></td>
+                        <td th:text="${data.name}"></td>
+                        <td th:text="${data.sensorID}"></td>
+                        <td th:text="${data.siteID}"></td>
+                        <td th:text="${data.value}"></td>
+                        <td th:text="${data.woID}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="#" th:href="@{/}" class="btn btn-large btn-success">Back</a>
+            </div>
+            <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+        </form>
     </div>
-
-    <div align="left" class="hero-unit">
-        <h1>
-            Manufactural Reports
-        </h1>
-
-        <table class="table table-condensed thead">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Company ID</th>
-                <th>Data Type</th>
-                <th>Device ID</th>
-                <th>Machine ID</th>
-                <th>Name</th>
-                <th>Sensor ID</th>
-                <th>Site ID</th>
-                <th>Value</th>
-                <th>Wo ID</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="data : ${datalist}">
-                <td th:text="${data.formattedDate}"></td>
-                <td th:text="${data.companyID}"></td>
-                <td th:text="${data.datatype}"></td>
-                <td th:text="${data.deviceID}"></td>
-                <td th:text="${data.machineID}"></td>
-                <td th:text="${data.name}"></td>
-                <td th:text="${data.sensorID}"></td>
-                <td th:text="${data.siteID}"></td>
-                <td th:text="${data.value}"></td>
-                <td th:text="${data.woID}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="#" th:href="@{/}" class="btn btn-large btn-success">Back</a>
-
-    </div>
-    <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
 </div>
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-
-        $("#startdate").datepicker({
-            format: "dd/mm/yyyy",
-            showOtherMonths: true,
-            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-        });
-
-        $("#enddate").datepicker({
-            format: "dd/mm/yyyy",
-            showOtherMonths: true,
-            dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-        });
-
-    });
-</script>
 </body>
 </html>

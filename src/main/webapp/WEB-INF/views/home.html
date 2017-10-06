@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}"
+          media="screen"/>
+    <link href="/webapp/resources/css/style.css" rel="stylesheet" th:href="@{/resources/css/style.css}" media="screen"/>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../../resources/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+</div>
+<div class="container">
+    <div class="hero-unit">
+        <img src="../../resources/invalue.jpg" alt="Image"/>
+        <h1>Invalue Portal</h1>
+        <p>
+            Welcome to Invalue Portal
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer">&copy; 2017 Invalue Portal</div>
+</div>
+</body>
+</html>

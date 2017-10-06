@@ -1,33 +1,50 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en-US">
 <head>
+    <meta charset="utf-8"/>
     <title>Invalue Portal Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/style_login.css" media="screen"
+          th:href="@{/resources/css/style_login.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.min.css" media="screen"
+          th:href="@{/resources/css/bootstrap.min.css}"/>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <table>
-        <tr>
-            <td>User Name:</td>
-            <td><input type="text" name="username"/></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" name="password"/></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" class="btn btn-large btn-success">Sign In</button>
-            </td>
-        </tr>
-    </table>
-</form>
-</body>
 
+<div class="container">
+    <div id="login">
+        <h2><span class="fontawesome"></span>InValue Portal Login</h2>
+        <form th:action="@{/login}" method="post">
+            <fieldset>
+                <table>
+                    <tr>
+                        <td><label>Username:</label></td>
+                        <td><input type="text" name="username"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Password:</label></td>
+                        <td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" class="btn btn-large btn-success">Log In</button>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</body>
 </html>
