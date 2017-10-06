@@ -3,22 +3,77 @@
 <head>
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}"
           media="screen"/>
-    <link href="/webapp/resources/css/style.css" rel="stylesheet" th:href="@{/resources/css/style.css}" media="screen"/>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../../resources/js/bootstrap.min.js"></script>
+    <link href="../../resources/css/style.css" rel="stylesheet" th:href="@{/resources/css/style.css}" media="screen"/>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--script type="text/javascript" src="./resources/js/jquery-latest.js" th:href="@{/resources/js/jquery-latest.js}"></script-->
+    <script src="./resources/js/bootstrap.min.js" th:href="@{/resources/css/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header">
 </div>
 <div class="container">
     <div class="hero-unit">
-        <img src="../../resources/invalue.jpg" alt="Image"/>
-        <h1>Invalue Portal</h1>
+        <img src="./resources/invalue.jpg" alt="Image"/>
+        <h1>InValue Portal</h1>
         <p>
-            Welcome to Invalue Portal
+            Welcome to InValue Portal
         </p>
     </div>
-    <div th:replace="fragments/footer :: footer">&copy; 2017 Invalue Portal</div>
+    <div th:replace="fragments/footer :: footer">&copy; 2017 InValue Portal</div>
+    <div class="container" style="width:800px; margin-right:50px; margin-top: -120px">
+        <h2>Usage Information</h2>
+        <table>
+            <tr>
+                <td><a class="btn-link" data-toggle="modal" data-target="#performanceModal">Performance Reports</a></td>
+            </tr>
+            <tr>
+                <td><a class="btn-link" data-toggle="modal" data-target="#productionModal">Production Reports</a></td>
+            </tr>
+        </table>
+
+        <!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button-->
+
+        <!-- Modal -->
+        <div class="modal fade" id="performanceModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Performance Reports</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>In this screen, users can query data using Date, Data Type and Operation criterias. It is
+                            accessible via the link in homepage header. </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="productionModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Production Reports</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>In this screen, users can query data using Date and Data Type criterias. It is accessible via
+                            the link in homepage header.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
 </body>
 </html>
